@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Liste des prestations</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>Liste des prestations</h1>
+
+			</div>
+		</div>
+		<div class="col-xs-2">
+			Filtre Chantier :
+		</div>
+		<div class="col-xs-4">
+			<select class="form-control filter" id="filtreChantier">
+				<option value="tout">Tous</option>
+				<option value="AM PRODUCTION (AMP0301)">AM PRODUCTION</option>
+				<option value="ADOMOS (ADM0101)">ADOMOS</option>
+			</select>
+		</div>
+		<div class="col-xs-2">
+			Filtre Prestation :
+		</div>
+		<div class="col-xs-4">
+			<select class="form-control filter" id="filtrePrestation">
+				<option value="tout">Toutes</option>
+				<option>Vitrerie</option>
+				<option>Remise en état mensuelle</option>
+			</select>
+		</div>
+		<table class="table table-striped table-responsive table-long">
+			<thead>
+				<tr>
+					<th style="width:30px">
+						<a onclick="openNewModal()" ><i
+								class="fa fa-plus-circle fa-2x"></i></a>
+					</th>
+					<th>Chantier</th>
+					<th>Prestation</th>
+					<th>Janv.</th>
+					<th>Fév.</th>
+					<th>Mars</th>
+					<th>Avril</th>
+					<th>Mai</th>
+					<th>Juin</th>
+					<th>Juil.</th>
+					<th>Août</th>
+					<th>Sept</th>
+					<th>Oct</th>
+					<th>Nov.</th>
+					<th>Déc.</th>
+					<th>Total</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="dataTable"></tbody>
+		</table>
+	</div>
+	<!--main-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Gestion des prestations</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<form class="formulaire-custom" id="form-heures">
+								<div class="inline-form">
+									<div class="" id="filtreHeure" style="margin: 10px 0px; padding-right: 0px;">
+										<div class="form-group">
+											<label for="" class="col-sm-1">Chantier</label>
+											<div class="col-sm-4" id="select_chantier_container">
+												<select class="form-control input-sm" name="heure_chantier"
+													id="chantier_type" type="text">
+													<option value="AM PRODUCTION (AMP0301)">AM PRODUCTION</option>
+													<option value="ADOMOS (ADM0101)">ADOMOS</option>
+												</select>
+											</div>
+											<label for="" class="col-sm-1">Prestation</label>
+											<div class="col-sm-4" id="select_chantier_container">
+												<select class="form-control input-sm" name="heure_chantier"
+													id="prestation_type" type="text">
+													<option>Vitrerie</option>
+													<option>Remise en état mensuelle</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<input id="modalInputType" value="add" type="hidden">
+											<input id="modalUpdateId" value="" type="hidden">
+											<hr style="margin:15px 0">
+											<div class="form-group" id="form-heures-classiques">
+												<div class="col-xs-2">
+													<label>Janvier</label>
+													<input class="form-control input-sm" id="heure_mois_1"
+														name="heure_mois_1" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Février</label>
+													<input class="form-control input-sm" id="heure_mois_2"
+														name="heure_mois_2" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Mars</label>
+													<input class="form-control input-sm" id="heure_mois_3"
+														name="heure_mois_3" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Avril</label>
+													<input class="form-control input-sm" id="heure_mois_4"
+														name="heure_mois_4" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Mai</label>
+													<input class="form-control input-sm" id="heure_mois_5"
+														name="heure_mois_5" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Juin</label>
+													<input class="form-control input-sm" id="heure_mois_6"
+														name="heure_mois_6" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Juillet</label>
+													<input class="form-control input-sm" id="heure_mois_7"
+														name="heure_mois_7" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Août</label>
+													<input class="form-control input-sm" id="heure_mois_8"
+														name="heure_mois_8" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Septembre</label>
+													<input class="form-control input-sm" id="heure_mois_9"
+														name="heure_mois_9" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Octobre</label>
+													<input class="form-control input-sm" id="heure_mois_10"
+														name="heure_mois_10" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Novembre</label>
+													<input class="form-control input-sm" id="heure_mois_11"
+														name="heure_mois_11" value="0" type=number step=0.1>
+												</div>
+												<div class="col-xs-2">
+													<label>Décembre</label>
+													<input class="form-control input-sm" id="heure_mois_12"
+														name="heure_mois_12" value="0" type=number step=0.1>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+					<button id="buttonValider" type="button" class="btn btn-primary">Valider</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	function buildRows(jsonList) {
+		let rows = '';
+		jsonList.forEach((data, i) => {
+			let total = data["janv"] + data["fev"] + data["mars"] + data["avril"] + data["mai"] + data["juin"] + data["juil"] + data["aout"] + data["sept"] + data["oct"] + data["nov"] + data["dec"];
+			rows += '<tr class="modalData" style="font-style:normal"' +
+				'<td></td>' +
+				'<td></td>' +
+				'<td> <a class="btn" onclick="modalData('+data["id"]+')"> ' + data["chantier"] + '</a></td>' +
+				'<td> <a class="btn" onclick="modalData('+data["id"]+')"> ' + data["prestation"] + '</a></td>' +
+				'<td>' + data["janv"] + '</td>' +
+				'<td>' + data["fev"] + '</td>' +
+				'<td>' + data["mars"] + '</td>' +
+				'<td>' + data["avril"] + '</td>' +
+				'<td>' + data["mai"] + '</td>' +
+				'<td>' + data["juin"] + '</td>' +
+				'<td>' + data["juil"] + '</td>' +
+				'<td>' + data["aout"] + '</td>' +
+				'<td>' + data["sept"] + '</td>' +
+				'<td>' + data["oct"] + '</td>' +
+				'<td>' + data["nov"] + '</td>' +
+				'<td>' + data["dec"] + '</td>' +
+				'<td>' + total.toFixed(2) + '</td>' +
+				'<td><a class="btn btn-xs btn-danger" onclick="deleteButton(' + data["id"] + ')"><i class="fa fa-trash"></i></a></td>' +
+				'</tr>'
+		})
+		return rows;
+	}
+
+	function buildLastRow(jsonList) {
+		let [tJanv, tFev, tMars, tAvril, tMai, tJuin, tJuil, tAout, tSept, tOct, tNov, tDec, tTotal] = Array(13).fill(0);
+		jsonList.forEach((data, i) => {
+			let total = data["janv"] + data["fev"] + data["mars"] + data["avril"] + data["mai"] + data["juin"] + data["juil"] + data["aout"] + data["sept"] + data["oct"] + data["nov"] + data["dec"];
+			tJanv += data["janv"];
+			tFev += data["fev"];
+			tMars += data["mars"];
+			tAvril += data["avril"];
+			tMai += data["mai"];
+			tJuin += data["juin"];
+			tJuil += data["juil"];
+			tAout += data["aout"];
+			tSept += data["sept"];
+			tOct += data["oct"];
+			tNov += data["nov"];
+			tDec += data["dec"];
+			tTotal += total;
+		})
+		let totalHeures = '<tr>' +
+			'<td></td>' +
+			'<td><b>TOTAL Heures</b></td>' +
+			'<td></td>' +
+			'<td><b>' + tJanv.toFixed(2) + '</b></td>' +
+			'<td><b>' + tFev.toFixed(2) + '</b></td>' +
+			'<td><b>' + tMars.toFixed(2) + '</b></td>' +
+			'<td><b>' + tAvril.toFixed(2) + '</b></td>' +
+			'<td><b>' + tMai.toFixed(2) + '</b></td>' +
+			'<td><b>' + tJuin.toFixed(2) + '</b></td>' +
+			'<td><b>' + tJuil.toFixed(2) + '</b></td>' +
+			'<td><b>' + tAout.toFixed(2) + '</b></td>' +
+			'<td><b>' + tSept.toFixed(2) + '</b></td>' +
+			'<td><b>' + tOct.toFixed(2) + '</b></td>' +
+			'<td><b>' + tNov.toFixed(2) + '</b></td>' +
+			'<td><b>' + tDec.toFixed(2) + '</b></td>' +
+			'<td><b>' + tTotal.toFixed(2) + '</b></td>' +
+			'<td></td>' +
+			'</tr>'
+		return totalHeures;
+	}
+
+	$(document).ready(function () {
+		$.ajax({
+			type: 'GET',
+			url: '/getInitialData',
+			success: function (data) {
+				$('#dataTable').html(buildRows(data) + buildLastRow(data));
+			}
+		});	
+	});
+
+	$(function () {
+		$("#buttonValider").on("click", function () {
+			var sendData = {
+				prestation: $('#prestation_type').val(),
+				chantier: $('#chantier_type').val(),
+				janv: $('#heure_mois_1').val(),
+				fev: $('#heure_mois_2').val(),
+				mars: $('#heure_mois_3').val(),
+				avril: $('#heure_mois_4').val(),
+				mai: $('#heure_mois_5').val(),
+				juin: $('#heure_mois_6').val(),
+				juil: $('#heure_mois_7').val(),
+				aout: $('#heure_mois_8').val(),
+				sept: $('#heure_mois_9').val(),
+				oct: $('#heure_mois_10').val(),
+				nov: $('#heure_mois_11').val(),
+				dec: $('#heure_mois_12').val(),
+				id : $('#modalUpdateId').val()
+			};
+			let url;
+			if($('#modalInputType').val() == "add"){
+				url = '/addData';
+			}else{
+				url = '/updateData';
+			}
+			$.ajax({
+				url: url,
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(sendData),
+				success: function (data) {
+					$('#dataTable').html(buildRows(data) + buildLastRow(data));
+					$('#myModal').modal('toggle');
+				}
+			});
+		});
+	});
+
+	function deleteButton(id) {
+		$.ajax({
+			url: '/delete',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({ id: id }),
+			success: function (data) {
+				$('#dataTable').html(buildRows(data) + buildLastRow(data));
+			}
+		});
+	}
+	function openNewModal() {
+		$('#myModal').modal('toggle');
+		$('#heure_mois_1').val( 0 );
+		$('#heure_mois_2').val( 0 );
+		$('#heure_mois_3').val( 0 );
+		$('#heure_mois_4').val( 0 );
+		$('#heure_mois_5').val( 0 );
+		$('#heure_mois_6').val( 0 );
+		$('#heure_mois_7').val( 0 );
+		$('#heure_mois_8').val( 0 );
+		$('#heure_mois_9').val( 0 );
+		$('#heure_mois_10').val( 0 );
+		$('#heure_mois_11').val( 0 );
+		$('#heure_mois_12').val( 0 );
+		$('#modalInputType').val("add");
+	}
+	
+	function modalData(id) {
+		$('#myModal').modal('toggle');
+		$.ajax({
+			url: '/modalData',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({ id: id }),
+			success: function (data) {
+				$('#prestation_type').val( data["prestation"] );
+				$('#chantier_type').val( data["chantier"]);
+				$('#heure_mois_1').val( data["janv"] );
+				$('#heure_mois_2').val( data["fev"] );
+				$('#heure_mois_3').val( data["mars"] );
+				$('#heure_mois_4').val( data["avril"] );
+				$('#heure_mois_5').val( data["mai"] );
+				$('#heure_mois_6').val( data["juin"] );
+				$('#heure_mois_7').val( data["juil"] );
+				$('#heure_mois_8').val( data["aout"] );
+				$('#heure_mois_9').val( data["sept"] );
+				$('#heure_mois_10').val( data["oct"]);
+				$('#heure_mois_11').val( data["nov"] );
+				$('#heure_mois_12').val( data["dec"] );
+				$('#modalInputType').val("update");
+				$('#modalUpdateId').val(id);
+			}
+		});
+	}
+
+	$(".filter").change(function () {
+		let valueChantier = $('#filtreChantier').val();
+		let valuePrestation = $('#filtrePrestation').val();
+		$.ajax({
+			url: '/filterChantier',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({ valueChantier: valueChantier, valuePrestation: valuePrestation }),
+			success: function (data) {
+				$('#dataTable').html(buildRows(data) + buildLastRow(data));
+			}
+		});
+	});
+
+
+</script>
+<style>
+	a {
+
+	color: black;
+	padding: 1em 1.5em;
+	text-decoration: none;
+	text-transform: uppercase;
+	}
+</style>
+
+</html>
