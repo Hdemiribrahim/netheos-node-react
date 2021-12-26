@@ -8,8 +8,9 @@ import theme from '../theme'
 
 const useStyles = makeStyles(() => ({
   paperStyle: {
-    margin: 20,
-    padding: 20,
+    marginBlock: 10,
+    marginInline:20,
+    paddingBlock: 20,
   },
   typogStyle: {
     color: 'white',
@@ -38,11 +39,12 @@ export default function PresentationArea({ title, subTitle }) {
           ) : (
             <></>
           )}
-          <Grid item xs={10}>
+          <Grid item xs={isMobile ? 12 : 9}>
             <Typography
               className={style.typogStyle}
               variant={isMobile ? 'h5' : 'h4'}
               gutterBottom
+              sx={isMobile ? {textAlign:'center'}:{textAlign:'left'}}
             >
               {title || ''}
             </Typography>
@@ -50,6 +52,7 @@ export default function PresentationArea({ title, subTitle }) {
               className={style.typogStyle}
               variant={isMobile ? 'subtitle1' : 'h6'}
               gutterBottom
+              sx={isMobile ? {textAlign:'center'}:{textAlign:'left'}}
             >
               {subTitle || ''}
             </Typography>

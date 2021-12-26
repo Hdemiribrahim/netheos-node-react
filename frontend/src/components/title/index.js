@@ -16,7 +16,7 @@ export default function Title({ title }) {
   const isMobile = useWindowSize().width < 640;
   const style = useStyles();
   return (
-    <ThemeProvider className={style.container} theme={theme}>
+    <ThemeProvider theme={theme}>
       <Typography
         className={style.typogStyle}
         variant={isMobile ? "h6" : "h5"}

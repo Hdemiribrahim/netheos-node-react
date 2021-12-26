@@ -29,7 +29,7 @@ export default function FaqPage() {
       })
   }, [])
   return (
-    <Paper sx={{ boxShadow: 3, margin: 2, padding: 2 }}>
+    <Paper sx={{ boxShadow: 3, margin: 2, padding: 1,paddingBottom:8 }}>
       <PresentationArea title="FAQs" subTitle="Questions fréquemment posées" />
       <SearchArea />
       {LoggedIn ? (
