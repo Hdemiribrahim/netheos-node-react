@@ -69,6 +69,7 @@ export default function AdminListPage() {
                 title={value?.tag}
                 question={value?.question}
                 answer={value?.answer}
+                deleteShow={false}
               />
             );
           })}

@@ -21,6 +21,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import useWindowSize from "../../utils/useWindowSize";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
+import Toastr from "../toastr";
 
 const useStyles = makeStyles(() => ({
   paperStyle: {
@@ -31,9 +32,12 @@ const useStyles = makeStyles(() => ({
 export default function AddNewQuestion({
   title = "Ajouter une nouvelle question",
 }) {
-  const [setfaqData] = useContext(DataContext);
+  const [faqData,setFaqData] = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
   const isMobile = useWindowSize().width < 640;
+  const [openToastr, setOpenToastr] = useState(false);
+  const [typeToastr, setTypeToastr] = useState();
+  const [infoToastr, setInfoToastr] = useState();
   const style = useStyles();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,8 +53,19 @@ export default function AddNewQuestion({
     fetch("/addData", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        setfaqData(data);
+        if (data.success) {
+          setFaqData(data.data);
+          setOpenToastr(true);
+          setTypeToastr("success");
+          setInfoToastr(data?.info);
+
+        } else {
+          setOpenToastr(true);
+          setTypeToastr("error");
+          setInfoToastr(data?.info);
+        }
       });
+      
     event.currentTarget.reset();
   };
   return (
@@ -137,6 +152,12 @@ export default function AddNewQuestion({
           </Accordion>
         </Paper>
       </Grow>
+      <Toastr
+          open={openToastr}
+          setOpen={setOpenToastr}
+          type={typeToastr}
+          info={infoToastr}
+        />
     </ThemeProvider>
   );
 }

@@ -1,23 +1,30 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect,useState } from 'react'
 import { AuthContext } from '../context/authContext'
 import { DataContext } from '../context/dataContext'
 import PresentationArea from '../components/presentationArea'
 import FaqMainTitles from '../components/faqMainTitles'
-
 import AddNewQuestion from '../components/addNewQuestion'
 import SearchArea from '../components/searchArea'
 import Title from '../components/title'
+import Toastr from "../components/toastr";
 import { Paper } from '@mui/material'
 
 export default function FaqPage() {
   const [LoggedIn] = useContext(AuthContext)
   const [faqData, setfaqData] = useContext(DataContext)
+  const [openToastr, setOpenToastr] = useState(false);
+  const [typeToastr, setTypeToastr] = useState();
+  const [infoToastr, setInfoToastr] = useState();
   useEffect(() => {
     fetch('/getFaqData')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           setfaqData(data.data)
+        }else {
+          setOpenToastr(true);
+          setTypeToastr("error");
+          setInfoToastr(data?.info);
         }
       })
   }, [])
@@ -71,6 +78,12 @@ export default function FaqPage() {
             : []
         }
       />
+      <Toastr
+          open={openToastr}
+          setOpen={setOpenToastr}
+          type={typeToastr}
+          info={infoToastr}
+        />
     </Paper>
   )
 }

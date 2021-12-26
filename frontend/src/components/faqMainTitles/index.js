@@ -46,6 +46,7 @@ export default function FaqMainTitles({ title, content }) {
                       title={value?.tag}
                       question={value?.question}
                       answer={value?.answer}
+                      deleteShow={true}
                     />
                   );
                 })}

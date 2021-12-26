@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { AuthContext } from "../context/authContext";
 import {
   Avatar,
@@ -18,9 +18,9 @@ const theme = createTheme();
 export default function AdminLoginPage() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useContext(AuthContext);
-  const [openToastr, setOpenToastr] = React.useState(false);
-  const [typeToastr, setTypeToastr] = React.useState();
-  const [infoToastr, setInfoToastr] = React.useState();
+  const [openToastr, setOpenToastr] = useState(false);
+  const [typeToastr, setTypeToastr] = useState();
+  const [infoToastr, setInfoToastr] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
