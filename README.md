@@ -13,9 +13,9 @@
     DB_DATABASE=netheos
     PORT=8000
 ### 2. Importer le fichier  .sql 
->Vous pouvez le trouver dans le chemin du ./backend/src/model
-    MySQL command line
-    mysql> source netheos.sql; 
+- Vous pouvez le trouver dans le chemin du ./backend/src/model
+- MySQL command line
+- mysql> source netheos.sql; 
 ### 3. Télécharger des packages  (  ./backend  )
 >npm install   
 ### 4. Lancer le backend  (  ./backend  )
@@ -30,5 +30,5 @@
 
 
 ## Url
-Faq Page            http://localhost:3000/ || http://localhost:3000/faq
-Admin Login Page    http://localhost:3000/admin
+- Faq Page            http://localhost:3000/ || http://localhost:3000/faq
+- Admin Connexion Page    http://localhost:3000/admin
