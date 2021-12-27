@@ -1,9 +1,9 @@
-# netheos-node-react
+<h2  align="center">Netheos FAQ Page (Node.js React.js)</h2>
 
 ### Exigences
- > Node.js & 
- > MySQL
-# Installation Backend - Node.js
+- Node.js & 
+- MySQL
+## Installation Backend - Node.js
 ### 1. Fichier .env
 > Créer un < .env > fichier ./backend/.env       
         
@@ -19,16 +19,19 @@
 ### 3. Télécharger des packages  (  ./backend  )
 >npm install   
 ### 4. Lancer le backend  (  ./backend  )
-  node app.js   ||  npm start 
+>node app.js   ||  npm start 
 
-# Installation Frontend - React.js
+## Installation Frontend - React.js
 ### 1. Télécharger des packages  (  ./frontend  )
->npm install   
+> npm install   
 
 ### 2. Lancer le frontend  (  ./frontend  )
-  npm start 
+> npm start 
 
 
 ## Url
 - Faq Page            http://localhost:3000/ || http://localhost:3000/faq
 - Admin Connexion Page    http://localhost:3000/admin
+
+## Postman
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8826791d630804c7448a)
