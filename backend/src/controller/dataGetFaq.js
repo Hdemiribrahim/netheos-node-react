@@ -1,12 +1,7 @@
 const query = require("../utils/config");
+const tagList = require("../utils/constants")
 
 module.exports.getFaqData = async function (req, res) {
-  let tagList = [
-    "Envoyer un colis",
-    "Envoyer un courrirer",
-    "Envoyer un objet de valeur",
-    "Donner procuration",
-  ];
   let returnData = {};
   try {
     for (const tag of tagList) {

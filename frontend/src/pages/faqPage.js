@@ -1,49 +1,45 @@
-import React, { useContext, useEffect,useState } from 'react'
-import { AuthContext } from '../context/authContext'
-import { DataContext } from '../context/dataContext'
-import PresentationArea from '../components/presentationArea'
-import FaqMainTitles from '../components/faqMainTitles'
-import AddNewQuestion from '../components/addNewQuestion'
-import SearchArea from '../components/searchArea'
-import Title from '../components/title'
+import React, { useContext, useEffect, useState } from "react";
+import { Paper } from "@mui/material";
+import { AuthContext } from "../context/authContext";
+import { DataContext } from "../context/dataContext";
+import PresentationArea from "../components/presentationArea";
+import FaqMainTitles from "../components/faqMainTitles";
+import AddNewQuestion from "../components/faqNewQuestion";
+import SearchArea from "../components/faqSearchArea";
+import Title from "../components/title";
 import Toastr from "../components/toastr";
-import { Paper } from '@mui/material'
 
-export default function FaqPage() {
-  const [LoggedIn] = useContext(AuthContext)
-  const [faqData, setfaqData] = useContext(DataContext)
+export function FaqPage() {
+  const [LoggedIn] = useContext(AuthContext);
+  const [faqData, setfaqData] = useContext(DataContext);
   const [openToastr, setOpenToastr] = useState(false);
   const [typeToastr, setTypeToastr] = useState();
   const [infoToastr, setInfoToastr] = useState();
   useEffect(() => {
-    fetch('/getFaqData')
+    fetch("/data/getFaq")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setfaqData(data.data)
-        }else {
+          setfaqData(data.data);
+        } else {
           setOpenToastr(true);
           setTypeToastr("error");
           setInfoToastr(data?.info);
         }
-      })
-  }, [])
+      });
+  }, []);
   return (
-    <Paper sx={{ boxShadow: 3, margin: 2, padding: 1,paddingBottom:8 }}>
+    <Paper sx={{ boxShadow: 3, margin: 2, padding: 1, paddingBottom: 8 }}>
       <PresentationArea title="FAQs" subTitle="Questions fréquemment posées" />
       <SearchArea />
-      {LoggedIn ? (
-        <AddNewQuestion/>
-      ) : (
-        <></>
-      )}
-      <Title title={'Choisissez votre thématique'} />
+      {LoggedIn && <AddNewQuestion />}
+      <Title title={"Choisissez votre thématique"} />
       <FaqMainTitles
         title="1. Envoyer un colis"
         content={
           faqData
-            ? faqData.hasOwnProperty('Envoyer un colis')
-              ? faqData['Envoyer un colis']
+            ? faqData.hasOwnProperty("Envoyer un colis")
+              ? faqData["Envoyer un colis"]
               : []
             : []
         }
@@ -52,8 +48,8 @@ export default function FaqPage() {
         title="2. Envoyer un courrirer"
         content={
           faqData
-            ? faqData.hasOwnProperty('Envoyer un courrirer')
-              ? faqData['Envoyer un courrirer']
+            ? faqData.hasOwnProperty("Envoyer un courrirer")
+              ? faqData["Envoyer un courrirer"]
               : []
             : []
         }
@@ -62,8 +58,8 @@ export default function FaqPage() {
         title="3. Envoyer un objet de valeur"
         content={
           faqData
-            ? faqData.hasOwnProperty('Envoyer un objet de valeur')
-              ? faqData['Envoyer un objet de valeur']
+            ? faqData.hasOwnProperty("Envoyer un objet de valeur")
+              ? faqData["Envoyer un objet de valeur"]
               : []
             : []
         }
@@ -72,18 +68,18 @@ export default function FaqPage() {
         title="4. Donner procuration"
         content={
           faqData
-            ? faqData.hasOwnProperty('Donner procuration')
-              ? faqData['Donner procuration']
+            ? faqData.hasOwnProperty("Donner procuration")
+              ? faqData["Donner procuration"]
               : []
             : []
         }
       />
       <Toastr
-          open={openToastr}
-          setOpen={setOpenToastr}
-          type={typeToastr}
-          info={infoToastr}
-        />
+        open={openToastr}
+        setOpen={setOpenToastr}
+        type={typeToastr}
+        info={infoToastr}
+      />
     </Paper>
-  )
+  );
 }

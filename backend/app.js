@@ -11,5 +11,5 @@ app.use('/',router);
 app.listen(process.env.PORT || 8001, () => {
     console.log('Listening on port: ', process.env.PORT);
  }).on('error', (e) => {
-    console.log('Error happened: ', e.message)
+    console.error('Error happened: ', e.message)
  });

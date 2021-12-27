@@ -1,11 +1,23 @@
 const query = require("../utils/config");
+const tagList = require("../utils/constants");
 
 module.exports.deleteData = async function (req, res) {
   var id = req.body.id;
   //Delete data
   try {
+    // Check data
+    const checkDataSql = "SELECT id FROM `faq` WHERE  id = (?)";
+    checkData = await query(checkDataSql, id);
+    if (!(checkData.length > 0))
+      return res.json({
+        success: false,
+        info: "Ooops. Données non trouvées ...",
+      });
+
+    // Delete data
     var sql = "DELETE FROM `faq` WHERE  id = (?)";
     await query(sql, id);
+    
   } catch (error) {
     return res.json({
       data: {},
@@ -15,12 +27,6 @@ module.exports.deleteData = async function (req, res) {
   }
 
   // Return all data for update context
-  let tagList = [
-    "Envoyer un colis",
-    "Envoyer un courrirer",
-    "Envoyer un objet de valeur",
-    "Donner procuration",
-  ];
   let returnData = {};
   try {
     for (const tag of tagList) {

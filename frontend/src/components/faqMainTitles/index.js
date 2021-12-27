@@ -11,7 +11,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useWindowSize from "../../utils/useWindowSize";
 import { ThemeProvider } from "@mui/material/styles";
 import FaqQuestions from "../faqQuestions";
-import theme from "../theme";
+import theme from "../../theme";
 
 const useStyles = makeStyles((theme) => ({
   paperStyle: {

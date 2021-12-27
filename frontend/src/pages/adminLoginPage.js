@@ -1,4 +1,5 @@
 import React, { useContext,useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import {
   Avatar,
@@ -10,12 +11,11 @@ import {
   Container,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Toastr from "../components/toastr";
 const theme = createTheme();
 
-export default function AdminLoginPage() {
+export function AdminLoginPage() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useContext(AuthContext);
   const [openToastr, setOpenToastr] = useState(false);
@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
     };
-    fetch("/loginAdmin", requestOptions)
+    fetch("/admin/login", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

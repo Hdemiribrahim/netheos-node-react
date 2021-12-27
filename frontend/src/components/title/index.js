@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import useWindowSize from "../../utils/useWindowSize";
-import theme from "../theme";
+import theme from "../../theme";
 const useStyles = makeStyles((theme) => ({
   typogStyle: {
     padding: 10,

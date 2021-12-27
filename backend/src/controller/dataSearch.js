@@ -2,7 +2,6 @@ const query = require("../utils/config");
 
 module.exports.search = async function (req, res) {
     let searchText= req.body.searchText;
-    console.log(searchText)
     let rows;
     try {
         let sqlSelect = "SELECT * FROM faq WHERE (question LIKE (?) OR answer LIKE (?))";

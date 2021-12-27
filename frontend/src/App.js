@@ -1,20 +1,16 @@
-import React , { useState,useEffect } from 'react'
-import FaqPage from './pages/faqPage'
-import AdminLoginPage from './pages/adminLoginPage'
-import AdminListPage from './pages/adminListPage'
-import Header from './components/layout/header'
-
+import React , { useState } from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import {FaqPage,AdminLoginPage,AdminListPage} from './pages'
+import Header from './layout/header'
 import { AuthContext } from "./context/authContext";
 import { DataContext } from "./context/dataContext";
-
 
 function App() {
   const tokenString = sessionStorage.getItem('token');
   let loggedIn;
   if (tokenString) loggedIn = true;
-  const [isLoggedIn, setIsLoggedIn] = React.useState(loggedIn);
-  const [faqData, setFaqData] = React.useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(loggedIn);
+  const [faqData, setFaqData] = useState();
   return (
     <AuthContext.Provider value={[isLoggedIn, setIsLoggedIn]}>
       <DataContext.Provider value={[faqData, setFaqData]}>

@@ -10,7 +10,7 @@ import {
 import Title from "../components/title";
 import FaqQuestions from "../components/faqQuestions";
 
-export default function AdminListPage() {
+export function AdminListPage() {
   const [data, setData] = useState();
   const [tag, setTag] = React.useState("all");
 
@@ -24,7 +24,7 @@ export default function AdminListPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ tag: tag }),
     };
-    fetch("/filterData", requestOptions)
+    fetch("/data/filter", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -59,24 +59,19 @@ export default function AdminListPage() {
           </Select>
         </FormControl>
       </Box>
-      {data ? (
-        <>
-          {data.map((value, index) => {
-            return (
-              <FaqQuestions
-                key={index}
-                id={value?.id}
-                title={value?.tag}
-                question={value?.question}
-                answer={value?.answer}
-                deleteShow={false}
-              />
-            );
-          })}
-        </>
-      ) : (
-        <></>
-      )}
+      {data &&
+        data.map((value, index) => {
+          return (
+            <FaqQuestions
+              key={index}
+              id={value?.id}
+              title={value?.tag}
+              question={value?.question}
+              answer={value?.answer}
+              deleteShow={false}
+            />
+          );
+        })}
     </Paper>
   );
 }

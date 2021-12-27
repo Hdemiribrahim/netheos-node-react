@@ -1,11 +1,12 @@
 import React, {useContext} from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { Box, AppBar, Toolbar, Typography, Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/authContext";
 import { ThemeProvider } from "@mui/material/styles";
+import { AuthContext } from "../context/authContext";
+
 import theme from "../theme";
 
 const useStyles = makeStyles(() => ({
@@ -40,25 +41,23 @@ export default function Header({ name }) {
           <Toolbar className={styles.toolbarStyle}>
             <Button component={Link} to={"/"}>
               <Typography variant="h6" className={styles.title}>
-                {name || ""}
+                {name}
               </Typography>
             </Button>
             <div className={styles.leftSection}>
               <Button component={Link} to={"/"} color="inherit">
                 HOME
               </Button>
-              {LoggedIn ? (
+              {LoggedIn &&
                 <Button
                   className={styles.lastButton}
                   component={Link}
                   to={"/adminListPage"}
                   color="inherit"
                 >
-                  toutes les questions
+                  questions
                 </Button>
-              ) : (
-                <></>
-              )}
+              }
             </div>
             <div className={styles.rightSection}>
               {!LoggedIn ? (

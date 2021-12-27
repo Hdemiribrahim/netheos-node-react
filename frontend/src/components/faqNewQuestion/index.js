@@ -18,9 +18,9 @@ import {
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveIcon from "@mui/icons-material/Remove";
-import useWindowSize from "../../utils/useWindowSize";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
+import useWindowSize from "../../utils/useWindowSize";
+import theme from "../../theme";
 import Toastr from "../toastr";
 
 const useStyles = makeStyles(() => ({
@@ -50,7 +50,7 @@ export default function AddNewQuestion({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question: question, answer: answer, tag: tag }),
     };
-    fetch("/addData", requestOptions)
+    fetch("/data/add", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

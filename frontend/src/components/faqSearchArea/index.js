@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
-import { styled, alpha } from "@mui/material/styles";
-import { Paper, Box, InputBase, Typography } from "@mui/material";
-import useWindowSize from "../../utils/useWindowSize";
+import { Paper, Box, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import useWindowSize from "../../utils/useWindowSize";
 import FaqQuestions from "../faqQuestions";
-import theme from "../theme";
+import theme from "../../theme";
+import { Search, StyledInputBase } from "./helpers";
 
-const Search = styled("div")(() => ({
-  display: "flex",
-  justifyContent: "right",
-  width: "35%",
-  paddingRight: 20,
-}));
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.85),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 1),
-    },
-  },
-}));
 const useStyles = makeStyles(() => ({
   paperStyle: {
     marginBlock: 10,
@@ -45,7 +27,6 @@ const useStyles = makeStyles(() => ({
 export default function SearchArea() {
   const [searchContent, setSearchContent] = useState("");
   const [data, setData] = useState("");
-
   const isMobile = useWindowSize().width < 640;
   const style = useStyles();
   const startSearch = (e) => {
@@ -54,13 +35,13 @@ export default function SearchArea() {
   useEffect(() => {
     // Search after typing
     const delay = setTimeout(() => {
-      if (searchContent != "") {
+      if (searchContent !== "") {
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ searchText: searchContent }),
         };
-        fetch("/search", requestOptions)
+        fetch("/data/search", requestOptions)
           .then((response) => response.json())
           .then((data) => {
             if (data.success) {
@@ -92,14 +73,12 @@ export default function SearchArea() {
               placeholder="Recherche..."
               inputProps={{ "aria-label": "search" }}
               value={searchContent}
-              onChange={(e) => {
-                startSearch(e);
-              }}
+              onChange={startSearch}
             />
           </Search>
         </Box>
 
-        {data && data.length >= 1 ? (
+        {data && data.length >= 1 && (
           <Box className={style.box}>
             {data.map((value, index) => {
               return (
@@ -113,8 +92,6 @@ export default function SearchArea() {
               );
             })}
           </Box>
-        ) : (
-          <></>
         )}
       </Paper>
     </ThemeProvider>

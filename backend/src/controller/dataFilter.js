@@ -3,6 +3,7 @@ const query = require("../utils/config");
 module.exports.filter = async function (req, res) {
   let tag = req.body.tag;
   let rows;
+  // Index 
   try {
     if (tag == "all") {
       let sql = "SELECT * FROM faq";

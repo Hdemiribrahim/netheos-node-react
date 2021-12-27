@@ -1,22 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const loginAdmin = require('./controller/loginAdmin')
-const addData = require('./controller/addData')
-const getFaqData = require('./controller/getFaqData')
-const filter = require('./controller/filter')
-const search = require('./controller/search')
-const deleteData = require('./controller/deleteData')
-const createAdmin = require('./controller/createAdmin')
+const loginAdmin = require("./controller/adminLogin");
+const addData = require("./controller/dataAdd");
+const getFaqData = require("./controller/dataGetFaq");
+const filter = require("./controller/dataFilter");
+const search = require("./controller/dataSearch");
+const deleteData = require("./controller/dataDelete");
+const createAdmin = require("./controller/adminCreate");
 
+router.post("/admin/create", createAdmin.createAdmin);
+router.post("/admin/login", loginAdmin.loginAdmin);
+router.get("/data/getFaq", getFaqData.getFaqData);
+router.post("/data/add", addData.addData);
+router.post("/data/delete", deleteData.deleteData);
+router.post("/data/filter", filter.filter);
 
-router.post('/loginAdmin',loginAdmin.loginAdmin);
-router.post('/addData',addData.addData);
-router.get('/getFaqData',getFaqData.getFaqData);
-router.post('/search',search.search);
-router.post('/filterData',filter.filter);
-router.post('/deleteData',deleteData.deleteData);
-
-// It is created for << create admin >>.
-/* router.get('/createAdmin',createAdmin.createAdmin); */
+router.post("/data/search", search.search);
 
 module.exports = router;
