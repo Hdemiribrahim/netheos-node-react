@@ -10,7 +10,7 @@
     DB_HOST=localhost
     DB_USER=root
     DB_PASSWORD=password
-    DB_DATABASE=netheos
+    DB_DATABASE=netheos_challenge_ugur
     PORT=8000
 ### 2. Importer le fichier  .sql 
 - Vous pouvez le trouver dans le chemin du ./backend/src/model
@@ -31,7 +31,10 @@
 
 ## Url
 - Faq Page            http://localhost:3000/ || http://localhost:3000/faq
+### Admin
 - Admin Connexion Page    http://localhost:3000/admin
+- username: admin 
+- password: admin
 
 ## Postman
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8826791d630804c7448a)
