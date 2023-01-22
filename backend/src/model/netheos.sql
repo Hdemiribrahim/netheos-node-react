@@ -18,8 +18,8 @@
 --
 -- Table structure for table `faq`
 --
-CREATE DATABASE `netheos_challenge_ugur`;
-USE `netheos_challenge_ugur`;
+CREATE DATABASE `mezun_projesi`;
+USE `mezun_projesi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 DROP TABLE IF EXISTS `faq`;
@@ -33,7 +33,7 @@ CREATE TABLE `faq` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `tag` (`tag`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

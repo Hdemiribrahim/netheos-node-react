@@ -1,31 +1,32 @@
-<h2  align="center">Netheos FAQ Page (Node.js React.js)</h2>
+<h2  align="center">mevzun işveren (Node.js React.js)</h2>
 
-### Exigences
+### gerekli paketler
 - Node.js & 
 - MySQL
 ## Installation Backend - Node.js
-### 1. Fichier .env
-> Créer un < .env > fichier ./backend/.env       
-        
+### 1. belge oluşturma => .env
+>  ./backend ıcıne .env belgesı olustur ve asagıdakı formatta ıstenen bılgılerı yaz       
+    Note: Bu ıslem sızın database e baglanmanızı saglar. Eger bu fıle olusturulmazsa backend calısmaz.
     DB_HOST=localhost
     DB_USER=root
     DB_PASSWORD=password
-    DB_DATABASE=netheos_challenge_ugur
+    DB_DATABASE=mezun_projesi
     PORT=8000
-### 2. Importer le fichier  .sql 
-- Vous pouvez le trouver dans le chemin du ./backend/src/model
-- MySQL command line
-- mysql> source netheos.sql; 
-### 3. Télécharger des packages  (  ./backend  )
+### 2. sql belgesını mysql ıcerısını aktarma
+- Belgeyı bu dosya yolunda bulabılırsınız ./backend/src/model
+- MySQL komutu asagıdakı gıbıdır
+- mysql ıcerısınde -> source netheos.sql; 
+### 3. Backend ıcın paketlerı ındırme  (  ./backend  )
+Bu ıslem backend dızını ıcerısınde yapılmak zorunda
 >npm install   
-### 4. Lancer le backend  (  ./backend  )
+### 4. Backend ı baslatma  (  ./backend  )
 >node app.js   ||  npm start 
 
-## Installation Frontend - React.js
-### 1. Télécharger des packages  (  ./frontend  )
+## Frontend ıcın paketlerı ındırm - React.js
+(  ./frontend  )
 > npm install   
 
-### 2. Lancer le frontend  (  ./frontend  )
+### 2. Frontend ı baslatma  (  ./frontend  )
 > npm start 
 
 
